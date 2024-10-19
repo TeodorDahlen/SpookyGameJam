@@ -38,6 +38,8 @@ public class ThrowBall : MonoBehaviour
     [SerializeField]
     private LayerMask LayerMask;
 
+    [SerializeField]
+    private bool hasSelectedSpot;
     private void Start()
     {
         myCamera = Camera.main;
@@ -48,10 +50,11 @@ public class ThrowBall : MonoBehaviour
     {
 
         myPos = myCamera.ScreenToWorldPoint(Input.mousePosition);
-      
-       
-        if (Input.GetMouseButton(0))
-        {
+
+
+        if (rb2d.velocity.magnitude == 0 && hasSelectedSpot == false)
+        { 
+
             collider.enabled = false;
             BackgroundCollider.enabled = true;
             BrainCollider.enabled = true;
@@ -77,23 +80,28 @@ public class ThrowBall : MonoBehaviour
                 }
             }
         }
+        if(Input.GetMouseButtonDown(1))
+        {
+            hasSelectedSpot = true;
+        }
         if(Input.GetMouseButton(1))
         {
             Debug.DrawLine(myCircle.transform.position, myPos + new Vector3(0, 0, myDistanceFromCamera), Color.red);
-            myDirection = myPos + new Vector3(0, 0, myDistanceFromCamera) - myCircle.transform.position;
+            myDirection = (myPos + new Vector3(0, 0, myDistanceFromCamera) - myCircle.transform.position).normalized;
         }
 
         if (Input.GetMouseButtonUp(1))
         {
-            BackgroundCollider.enabled = false;
+            BackgroundCollider.enabled = false; 
             BrainCollider.enabled = false;
             Momentum();
             Invoke(nameof(TurnOnColliders), 0.1f);
+            hasSelectedSpot = false;
         }
     }
     private void Momentum()
     {
-        rb2d.velocity += -(Vector2)myDirection.normalized * mySpeed * Time.deltaTime;
+        rb2d.velocity += -(Vector2)myDirection * mySpeed * Time.deltaTime;
     }
     private Vector2 ShootRaycastFromPoints(Vector2 from, Vector2 to)
     {

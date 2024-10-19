@@ -29,5 +29,6 @@ public class Tadpole : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             curWallBounces = 0;
         }
+        Brain.Instance.UpdateBrain();
     }
 }

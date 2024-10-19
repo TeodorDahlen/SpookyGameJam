@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Brain : MonoBehaviour
 {
+    public static Brain Instance { get; private set; }
+
     [SerializeField]
     private GameObject brainPoints;
 
@@ -12,20 +14,34 @@ public class Brain : MonoBehaviour
 
     private List<GameObject> currentBrainActivity = new List<GameObject>();
 
-    private void Start()
+    [SerializeField]
+    private ObjSpawner spawner;
+
+    [SerializeField]
+    private GameObject Arm;
+
+    private void Awake()
     {
-        SpawnBrainPoint();
+        Instance = this;
     }
-    private void Update()
+    public void StartBrain()
     {
-        UpdateBrain();
+        foreach (GameObject brainPoint in currentBrainActivity)
+        {
+            Destroy(brainPoint);
+        }
+        currentBrainActivity.Clear();
+        SpawnBrainPoint();
+        spawner.StopAllMovement();
+        Debug.Log("play again");
+        Arm.SetActive(false);
     }
     private void SpawnBrainPoint()
     {
         for (int i = 0; i < spawnAmount; i++)
         {
             Debug.Log("Spawn");
-            GameObject newBrainPoint = Instantiate(brainPoints, transform.position + (Vector3)Random.insideUnitCircle * 3, Quaternion.identity);
+            GameObject newBrainPoint = Instantiate(brainPoints, transform.position + (Vector3)Random.insideUnitCircle * 2, Quaternion.identity);
             currentBrainActivity.Add(newBrainPoint);
         }
     }
@@ -46,6 +62,9 @@ public class Brain : MonoBehaviour
     }
     public void BrainOver()
     {
-        Debug.Log("brain over");
+        CosmicMaster.Instance.KillHuman();
+        spawner.StartAllMovement();
+        Arm.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

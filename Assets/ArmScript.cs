@@ -8,14 +8,16 @@ public class ArmScript : MonoBehaviour
     [SerializeField]
     private GameObject mindBlast;
 
-
+    [SerializeField]
+    private GameObject brain;
     private void Update()
     {
         transform.up = -(Vector2)(Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
 
         if(Input.GetMouseButtonDown(0))
         { 
-            Instantiate(mindBlast, transform.position, transform.rotation);
+            GameObject newMindBlast = Instantiate(mindBlast, transform.position, transform.rotation);
+            newMindBlast.GetComponent<MindBlast>().brain = brain;
         }
         
     }
