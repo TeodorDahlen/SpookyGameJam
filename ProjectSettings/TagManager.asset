@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Brain
+  - BrainWall
   layers:
   - Default
   - TransparentFX

@@ -12,6 +12,12 @@ public class ThrowBall : MonoBehaviour
     [SerializeField]
     private Collider2D collider;
 
+    [SerializeField]
+    private Collider2D BrainCollider;
+    [SerializeField]
+    private Collider2D BackgroundCollider;
+
+
     private Vector3 myDirection;
 
     [SerializeField]
@@ -47,6 +53,8 @@ public class ThrowBall : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             collider.enabled = false;
+            BackgroundCollider.enabled = true;
+            BrainCollider.enabled = true;
             myDirection = Vector3.zero;
             rb2d.velocity *= 0;
 
@@ -68,7 +76,6 @@ public class ThrowBall : MonoBehaviour
                     Debug.Log("its outside");
                 }
             }
- 
         }
         if(Input.GetMouseButton(1))
         {
@@ -78,13 +85,15 @@ public class ThrowBall : MonoBehaviour
 
         if (Input.GetMouseButtonUp(1))
         {
-            collider.enabled = true;
+            BackgroundCollider.enabled = false;
+            BrainCollider.enabled = false;
             Momentum();
+            Invoke(nameof(TurnOnColliders), 0.1f);
         }
     }
     private void Momentum()
     {
-        rb2d.velocity += -(Vector2)myDirection * mySpeed * Time.deltaTime;
+        rb2d.velocity += -(Vector2)myDirection.normalized * mySpeed * Time.deltaTime;
     }
     private Vector2 ShootRaycastFromPoints(Vector2 from, Vector2 to)
     {
@@ -157,5 +166,8 @@ public class ThrowBall : MonoBehaviour
         return smallest;
     }
     
-    
+    private void TurnOnColliders()
+    {
+        collider.enabled = true;
+    }
 }
