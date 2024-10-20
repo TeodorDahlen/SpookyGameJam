@@ -31,11 +31,12 @@ public class Brain : MonoBehaviour
             Destroy(brainPoint);
         }
         currentBrainActivity.Clear();
-        SpawnBrainPoint();
+        StartCoroutine(RandomBrainSpasmTimeDiff());
         spawner.StopAllMovement();
         Debug.Log("play again");
         Arm.SetActive(false);
     }
+
     private void SpawnBrainPoint()
     {
         for (int i = 0; i < spawnAmount; i++)
@@ -66,5 +67,18 @@ public class Brain : MonoBehaviour
         spawner.StartAllMovement();
         Arm.SetActive(true);
         gameObject.SetActive(false);
+        CosmicMaster.Instance.UpdateScore(1);
+    }
+    
+    private IEnumerator RandomBrainSpasmTimeDiff()
+    {
+        for (int i = 0; i < spawnAmount; i++)
+        {
+            Debug.Log("Spawn");
+            GameObject newBrainPoint = Instantiate(brainPoints, transform.position + (Vector3)Random.insideUnitCircle * 2, Quaternion.identity);
+            currentBrainActivity.Add(newBrainPoint);
+            yield return new WaitForSeconds(Random.Range(0.05f, 0.15f));
+        }
+        
     }
 }

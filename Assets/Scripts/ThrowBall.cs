@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class ThrowBall : MonoBehaviour
 {
@@ -40,6 +36,11 @@ public class ThrowBall : MonoBehaviour
 
     [SerializeField]
     private bool hasSelectedSpot;
+
+    [SerializeField]
+    private GameObject arrow;
+
+
     private void Start()
     {
         myCamera = Camera.main;
@@ -79,6 +80,7 @@ public class ThrowBall : MonoBehaviour
                     Debug.Log("its outside");
                 }
             }
+            myCircle.transform.up = -(Brain.Instance.transform.position - myCircle.transform.position);
         }
         if(Input.GetMouseButtonDown(1))
         {
@@ -87,7 +89,9 @@ public class ThrowBall : MonoBehaviour
         if(Input.GetMouseButton(1))
         {
             Debug.DrawLine(myCircle.transform.position, myPos + new Vector3(0, 0, myDistanceFromCamera), Color.red);
+
             myDirection = (myPos + new Vector3(0, 0, myDistanceFromCamera) - myCircle.transform.position).normalized;
+            arrow.transform.up = myDirection.normalized;
         }
 
         if (Input.GetMouseButtonUp(1))
@@ -101,7 +105,7 @@ public class ThrowBall : MonoBehaviour
     }
     private void Momentum()
     {
-        rb2d.velocity += -(Vector2)myDirection * mySpeed * Time.deltaTime;
+        rb2d.velocity += -(Vector2)myDirection * mySpeed;
     }
     private Vector2 ShootRaycastFromPoints(Vector2 from, Vector2 to)
     {
@@ -178,4 +182,6 @@ public class ThrowBall : MonoBehaviour
     {
         collider.enabled = true;
     }
+
+    
 }

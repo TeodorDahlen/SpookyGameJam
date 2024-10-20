@@ -16,9 +16,14 @@ public class MindBlast : MonoBehaviour
     [SerializeField]
     public GameObject brain;
 
+    [SerializeField]
+    private AudioClip hitSound;
+    private AudioSource audioSource;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         rb.velocity = transform.up * movementSpeed;
     }
 
@@ -30,7 +35,11 @@ public class MindBlast : MonoBehaviour
         brain.SetActive(true);
         brain.GetComponent<Brain>().StartBrain();
         Destroy(newPS, 1);
-        Destroy(gameObject);
+        audioSource.PlayOneShot(hitSound);
+        Destroy(gameObject,0.1f);
+
     }
+
+
 
 }

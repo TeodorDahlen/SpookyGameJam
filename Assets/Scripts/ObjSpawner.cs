@@ -16,7 +16,8 @@ public class ObjSpawner : MonoBehaviour
     private float moveSpeed;
 
     [SerializeField]
-    private float spawnTimer = 2;
+    private float spawnTimerBase = 2;
+    private float spawnTimerVariant;
     private float spawnTime = 0;
     [SerializeField]
     private int moveDirection = 1;
@@ -28,21 +29,16 @@ public class ObjSpawner : MonoBehaviour
     private void Start()
     {
         canMove = true;
+        spawnTimerVariant = spawnTimerBase;
+        SpawnObjects();
     }
     private void Update()
     {
         spawnTime += Time.deltaTime;
 
-        if(spawnTime >= spawnTimer && canMove)
+        if(spawnTime >= spawnTimerVariant && canMove)
         {
-            clearSpawnedList();
-            spawnTime = 0;
-            GameObject obj = Instantiate(spawnObjects[Random.Range(0, spawnObjects.Count)], transform.position + new Vector3(0, Random.Range(-1.5f, 1.5f), 0), Quaternion.identity);
-            spawnedObjects.Add(obj);
-            obj.GetComponent<HumanMovement>().movemenDirection = moveDirection;
-
-            Vector3 scale = obj.transform.localScale;
-            obj.transform.localScale = new Vector3(scale.x * (-moveDirection), scale.y, scale.z);
+            SpawnObjects();
         }
     }
     private void clearSpawnedList()
@@ -57,11 +53,18 @@ public class ObjSpawner : MonoBehaviour
     }
     private void SpawnObjects()
     {
-        for (int i = 0; i < spawnAmount; i++)
-        {
-            GameObject obj = Instantiate(spawnObjects[Random.Range(0, spawnObjects.Count)], transform.position, Quaternion.identity);
-            spawnedObjects.Add(obj);
-        }
+        clearSpawnedList();
+        spawnTime = 0;
+        float randomNumber = Random.Range(-1.5f, 1.5f);
+        GameObject obj = Instantiate(spawnObjects[Random.Range(0, spawnObjects.Count)], transform.position + new Vector3(0, randomNumber, 0), Quaternion.identity);
+        spawnedObjects.Add(obj);
+        obj.GetComponent<HumanMovement>().movemenDirection = moveDirection;
+
+        obj.GetComponent<HumanMovement>().sprite.sortingOrder = -Mathf.FloorToInt(obj.transform.position.y + randomNumber);
+
+        Vector3 scale = obj.transform.localScale;
+        obj.transform.localScale = new Vector3(scale.x * (-moveDirection), scale.y, scale.z);
+        spawnTimerVariant = spawnTimerBase * Random.Range(0.5f, 1.5f);
     }
 
     private void MoveObjects()
@@ -79,7 +82,7 @@ public class ObjSpawner : MonoBehaviour
             GameObject obj = Instantiate(spawnObjects[Random.Range(0, spawnObjects.Count)], transform.position + new Vector3(0, Random.Range(-1.5f, 1.5f), 0), Quaternion.identity);
             spawnedObjects.Add(obj);
             obj.GetComponent<HumanMovement>().movemenDirection = moveDirection;
-            yield return new WaitForSeconds(Random.Range(spawnTimer * 0.5f, spawnTimer * 2.0f));
+            yield return new WaitForSeconds(Random.Range(spawnTimerBase * 0.5f, spawnTimerBase * 2.0f));
         }
     }
 
