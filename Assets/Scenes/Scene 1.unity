@@ -2025,10 +2025,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4488136128162e84eb1c363a111d8b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObject: {fileID: 4379974179937872756, guid: cc05c4c8e42dd8d4db31e156cffcd197, type: 3}
+  spawnObjects: []
   spawnAmount: 10
   moveSpeed: 0
   spawnTimer: 2
+  moveDirection: 1
+  canMove: 0
 --- !u!4 &1914030547
 Transform:
   m_ObjectHideFlags: 0
@@ -2090,6 +2092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mindBlast: {fileID: 6463976272701873904, guid: eb2e1490483d94040bfc9b1c65cab323, type: 3}
+  brain: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
