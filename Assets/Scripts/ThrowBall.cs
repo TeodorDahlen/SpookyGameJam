@@ -45,6 +45,7 @@ public class ThrowBall : MonoBehaviour
     {
         myCamera = Camera.main;
         collider = myCircle.GetComponent<Collider2D>();
+        arrow.SetActive(false);
     }
 
     private void Update()
@@ -85,17 +86,19 @@ public class ThrowBall : MonoBehaviour
         if(Input.GetMouseButtonDown(1))
         {
             hasSelectedSpot = true;
+            arrow.SetActive(true);
         }
         if(Input.GetMouseButton(1))
         {
             Debug.DrawLine(myCircle.transform.position, myPos + new Vector3(0, 0, myDistanceFromCamera), Color.red);
 
             myDirection = (myPos + new Vector3(0, 0, myDistanceFromCamera) - myCircle.transform.position).normalized;
-            arrow.transform.up = myDirection.normalized;
+            arrow.transform.up = -(Vector2)myDirection.normalized;
         }
 
         if (Input.GetMouseButtonUp(1))
         {
+            arrow.SetActive(false);
             BackgroundCollider.enabled = false; 
             BrainCollider.enabled = false;
             Momentum();

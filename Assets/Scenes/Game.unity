@@ -1890,7 +1890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mindBlast: {fileID: 6463976272701873904, guid: eb2e1490483d94040bfc9b1c65cab323, type: 3}
   brain: {fileID: 1632507070}
-  fireRate: 0
+  fireRate: 1
 --- !u!1 &2095124756
 GameObject:
   m_ObjectHideFlags: 0
@@ -2023,13 +2023,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4356852631075608928, guid: c6b4db95e6f6c16438909fb0e866874c, type: 3}
-      propertyPath: hitSound
-      value: 
-      objectReference: {fileID: 8300000, guid: c234ea69f855ec743a8bdbea2da91090, type: 3}
+    - target: {fileID: 2249371779416027454, guid: c6b4db95e6f6c16438909fb0e866874c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249371779416027454, guid: c6b4db95e6f6c16438909fb0e866874c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249371779416027454, guid: c6b4db95e6f6c16438909fb0e866874c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6439294660773036842, guid: c6b4db95e6f6c16438909fb0e866874c, type: 3}
       propertyPath: m_Name
       value: Brain
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439294660773036842, guid: c6b4db95e6f6c16438909fb0e866874c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8717779736631350190, guid: c6b4db95e6f6c16438909fb0e866874c, type: 3}
       propertyPath: Arm

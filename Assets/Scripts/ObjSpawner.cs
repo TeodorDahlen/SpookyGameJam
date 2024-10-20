@@ -65,6 +65,7 @@ public class ObjSpawner : MonoBehaviour
         Vector3 scale = obj.transform.localScale;
         obj.transform.localScale = new Vector3(scale.x * (-moveDirection), scale.y, scale.z);
         spawnTimerVariant = spawnTimerBase * Random.Range(0.5f, 1.5f);
+        spawnTimerBase *= 0.95f;
     }
 
     private void MoveObjects()

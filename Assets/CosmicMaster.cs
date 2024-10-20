@@ -26,11 +26,13 @@ public class CosmicMaster : MonoBehaviour
     public void KillHuman()
     {
         GameObject targetToKill = currentHumanTarget;
-        Destroy(Instantiate(killEffect, targetToKill.transform.position + new Vector3(0, 1.9f,0), Quaternion.identity), 0.5f);
+        
         targetToKill.GetComponent<HumanMovement>().GoToSleep();
         targetToKill.GetComponent<HumanMovement>().enabled = false;
         targetToKill.GetComponent<Animator>().SetTrigger("Death");
+
         //Destroy(targetToKill);
+        Destroy(Instantiate(killEffect, targetToKill.transform.position + new Vector3(0, 1.9f,0), Quaternion.identity), 0.5f);
         currentHumanTarget = null;
     }
 

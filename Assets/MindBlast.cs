@@ -29,17 +29,17 @@ public class MindBlast : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        CosmicMaster.Instance.currentHumanTarget = collision.gameObject;
-        GameObject newPS = Instantiate(mindBlastEnterParticals, transform.position, Quaternion.identity);
-        Debug.Log("turn it on");
-        brain.SetActive(true);
-        brain.GetComponent<Brain>().StartBrain();
-        Destroy(newPS, 1);
-        audioSource.PlayOneShot(hitSound);
-        Destroy(gameObject,0.1f);
-
+        if (collision.gameObject.GetComponent<HumanMovement>() != null)
+        {
+            CosmicMaster.Instance.currentHumanTarget = collision.gameObject;
+            GameObject newPS = Instantiate(mindBlastEnterParticals, transform.position, Quaternion.identity);
+            Debug.Log("turn it on");
+            brain.SetActive(true);
+            brain.GetComponent<Brain>().StartBrain();
+            Destroy(newPS, 1);
+            audioSource.PlayOneShot(hitSound);
+            Destroy(gameObject, 0.1f);
+            collision.gameObject.GetComponent<Collider2D>().enabled = false;
+        }
     }
-
-
-
 }

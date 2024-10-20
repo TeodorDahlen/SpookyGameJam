@@ -256,6 +256,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7490159541958063609}
+  - {fileID: 2249371779416027454}
   m_Father: {fileID: 1924278148251814692}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6467957900295443239
@@ -655,7 +656,6 @@ Transform:
   - {fileID: 1131794377471119469}
   - {fileID: 2913639300635708079}
   - {fileID: 7238477631145192669}
-  - {fileID: 2249371779416027454}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7906621991703774017
@@ -786,13 +786,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6652085194145381149}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: 0, y: 0.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2249371779416027454}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
 --- !u!212 &3755943716550208548
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -834,7 +834,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1000
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c242dffa1e611f248ab9c253884a8f6b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -870,12 +870,12 @@ Transform:
   m_GameObject: {fileID: 7135131052725569188}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.17, y: -9.92, z: -0.005195804}
-  m_LocalScale: {x: 1.9230769, y: 1.9230769, z: 1.9230769}
+  m_LocalPosition: {x: 0.03, y: -3.94, z: -0.005195804}
+  m_LocalScale: {x: 1.9230767, y: 1.9230767, z: 1.9230767}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1380531595369593390}
-  m_Father: {fileID: 1924278148251814692}
+  m_Father: {fileID: 2913639300635708079}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8865847912650189204
 GameObject:
@@ -932,4 +932,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   hasSelectedSpot: 0
-  arrow: {fileID: 0}
+  arrow: {fileID: 7135131052725569188}
